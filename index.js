@@ -12,7 +12,7 @@ getCategories()
 //Add Eventlistioner---------------------------
 
 cuisineSelect.addEventListener("change", getRecipesByCuisine)
-//categorySelect.addEventListener("change", getRecipesByCategories)
+categorySelect.addEventListener("change", getRecipesByCategories)
 
 //EventL End---------------------------------
 
@@ -115,7 +115,13 @@ function renderRecipeCard(recipe) {
 }
 
 function getRecipesByCategories(e) {
+    const category = e.target.value
+   
 
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+        .then(r => r.json())
+        .then(recipes => renderAllRecipes(recipes.meals))
+        .catch(error => alert(error))
 
 }
 
